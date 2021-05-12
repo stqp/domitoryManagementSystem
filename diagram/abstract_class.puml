@@ -1,0 +1,116 @@
+@startuml
+package Shared {
+  class TimePeriod {
+    startedAt
+    endedAt
+  }
+}
+package RentalProperty{
+  class Building {
+    name
+  }
+  class Floor
+  class Room
+  Building o- Floor
+  Floor o- Room
+  Building -- Location.Address
+}
+package Rent {
+  class Contract {
+    startedAt
+  }
+  class Pledge
+  class Guarantee {
+    relationship
+  }
+  note top of Guarantee: 保証人になれるのは社会人のみ
+  note top of Guarantee: 学生は保証人必須
+  class Application
+  class MoveInOut {
+    moveInAt
+  }
+  class HandOverKey
+  class RoomAssignment
+  Room -- Contract
+  Contract -- Resident.LesseeParty
+  Room -- Pledge
+  Pledge -- Resident.LesseeParty
+  Room -- MoveInOut
+  MoveInOut -- Resident.LesseeParty
+  Room -- HandOverKey
+  HandOverKey -- Resident.LesseeParty
+  Room -- RoomAssignment
+  RoomAssignment -- Resident.LesseeParty
+  Application -- Resident.LesseeParty
+  Guarantee -- Resident.LesseeParty:被保証
+  Guarantee -- Resident.Individual: 保証人
+}
+package Resident{
+  class LesseeParty
+  class PersonParty {
+    String name
+    String name_kana
+  }
+  class Corporation
+  class Individual
+
+  LesseeParty -- Individual
+  LesseeParty -- Corporation
+  PersonParty -- Individual
+  PersonParty -- Corporation
+  PersonParty -- Location.EmailAddress
+  PersonParty -- Location.Address
+  PersonParty -- Location.TelephoneNumber
+  Individual - Corporation :勤務
+}
+package Location{
+  class Address
+  class TelephoneNumber
+  class EmailAddress
+}
+
+package Payment {
+  class BankAccount {
+    BankCode
+    BankBranchCode
+    AccountType
+    AccountNumber
+    AccountName
+    AccountNameKana
+  }
+  class Payment
+  class Exemption
+  class FullPayment
+  class Installment
+  Payment --- Contract
+  Exemption -- Contract
+  Payment <|-- FullPayment
+  Payment <|-- Installment
+  Payment -- Location.Address
+}
+
+package school {
+  class SchoolRegister {
+    startedAt
+    examNumber
+  }
+  class OrganizationStructure
+  class Organization
+  class School
+  class Faculty
+  class Department
+  class Club {
+    string name
+  }
+  Organization <|-- School
+  Organization <|-- Faculty
+  Organization <|-- Department
+  OrganizationStructure "*" -right- "1" Organization :親
+  OrganizationStructure "*" -right- "1" Organization :子
+  OrganizationStructure "*" -down- "1" TimePeriod
+  Resident.Individual -- SchoolRegister
+  SchoolRegister - Organization
+  Club -- SchoolRegister :belongs
+}
+
+@enduml

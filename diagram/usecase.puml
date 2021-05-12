@@ -1,0 +1,7 @@
+@startuml
+
+usecase 建物を管理する
+usecase 入寮者を登録する
+usecase 入寮状況を閲覧する
+
+@enduml
