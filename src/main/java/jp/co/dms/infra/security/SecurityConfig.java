@@ -1,85 +1,52 @@
 package jp.co.dms.infra.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+
+import static jp.co.dms.infra.security.SecurityConstants.LOGIN_URL;
+import static jp.co.dms.infra.security.SecurityConstants.SIGNUP_URL;
+
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Qualifier("simpleUserDetailsService")
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .mvcMatchers("/prelogin", "/hello/**")
-                .permitAll()
-                .mvcMatchers("/user/**")
-                .hasRole("USER")
-                .mvcMatchers("/admin/**")
-                .hasRole("ADMIN")
-                .anyRequest()
-                .authenticated()
-                .and()
-                // EXCEPTION
-                .exceptionHandling()
-                .authenticationEntryPoint(authenticationEntryPoint())
-                .accessDeniedHandler(accessDeniedHandler())
-                .and()
-                // LOGIN
-                .formLogin()
-                .loginProcessingUrl("/login").permitAll()
-                .usernameParameter("email")
-                .passwordParameter("pass")
-                .successHandler(authenticationSuccessHandler())
-                //.failureHandler(authenticationFailureHandler())
-                .and()
-                // LOGOUT
-                .logout()
-                .logoutUrl("/logout")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-                .logoutSuccessHandler(logoutSuccessHandler())
-                //.addLogoutHandler(new CookieClearingLogoutHandler())
-                .and()
-                // CSRF
-                .csrf()
-                //.disable()
-                //.ignoringAntMatchers("/login")
-                .csrfTokenRepository(new CookieCsrfTokenRepository())
-        ;
+                .cors()
+                .and().authorizeRequests()
+                .antMatchers("/public", SIGNUP_URL, LOGIN_URL).permitAll()
+                .anyRequest().authenticated()
+                .and().logout()
+                .and().csrf().disable()
+                .addFilter(new JWTAuthenticationFilter(authenticationManager(), bCryptPasswordEncoder()))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    }
+
+    @Autowired
+    public void configureAuth(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(bCryptPasswordEncoder());
     }
 
     @Bean
-    PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    AuthenticationEntryPoint authenticationEntryPoint() {
-        return new SimpleAuthenticationEntryPoint();
-    }
-
-    AccessDeniedHandler accessDeniedHandler() {
-        return new SimpleAccessDeniedHandler();
-    }
-
-    AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return new SimpleAuthenticationSuccessHandler();
-    }
-
-//    AuthenticationFailureHandler authenticationFailureHandler() {
-//        return new SimpleAuthenticationFailureHandler();
-//    }
-
-    LogoutSuccessHandler logoutSuccessHandler() {
-        return new HttpStatusReturningLogoutSuccessHandler();
-    }
 
 }

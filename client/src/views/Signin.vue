@@ -26,20 +26,14 @@ export default {
   },
   methods: {
     signIn: async function () {
-      await firebase.auth().signInWithEmailAndPassword(this.username, this.password)
-          .then(() => this.$router.push('/currency'))
-          .catch(error => {
-            this.$message({
-              showClose: true,
-              message: error,
-              type: 'error'
-            })
-          })
+      return "";
     },
   }
 }
 </script>
 
-<style scoped lang="scss">
-@import "../styles/base";
+<style lang="scss">
+@import "../styles/base.scss";
+
 </style>
+
