@@ -1,4 +1,4 @@
-package jp.co.dms.infra.security;
+package jp.co.dms.infrastructure.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-import static jp.co.dms.infra.security.SecurityConstants.SIGNUP_URL;
+import static jp.co.dms.infrastructure.security.SecurityConstants.SIGNUP_URL;
 
 @RestController
 public class SecurityController {
@@ -29,22 +29,14 @@ public class SecurityController {
 
     @GetMapping(value = "/private")
     public String privateApi() {
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        // JWTAuthenticationFilter#successfulAuthenticationで設定したusernameを取り出す
         String username = (String) (authentication.getPrincipal());
-
         return "this is private for " + username;
     }
 
     @PostMapping(value = SIGNUP_URL)
     public void signup(@Valid @RequestBody UserForm user) {
-
-        // passwordを暗号化する
         user.encrypt(bCryptPasswordEncoder);
-
-        // DBに保存する処理を本来は書く
         LOGGER.info("signup :" + user.toString());
     }
 }

@@ -1,4 +1,4 @@
-package jp.co.dms.infra.security;
+package jp.co.dms.infrastructure.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,9 +10,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import static jp.co.dms.infra.security.SecurityConstants.LOGIN_URL;
-import static jp.co.dms.infra.security.SecurityConstants.SIGNUP_URL;
+import static jp.co.dms.infrastructure.security.SecurityConstants.LOGIN_URL;
+import static jp.co.dms.infrastructure.security.SecurityConstants.SIGNUP_URL;
 
 
 @EnableWebSecurity
@@ -29,11 +32,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                 .antMatchers("/public", SIGNUP_URL, LOGIN_URL).permitAll()
                 .anyRequest().authenticated()
+                .and()
+                .cors().configurationSource(this.corsConfigurationSource())
                 .and().logout()
                 .and().csrf().disable()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager(), bCryptPasswordEncoder()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    }
+
+
+    private CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedHeader(CorsConfiguration.ALL);
+        corsConfiguration.addAllowedMethod(CorsConfiguration.ALL);
+        corsConfiguration.addAllowedOrigin("http://localhost:8080");
+        corsConfiguration.addAllowedOrigin("http://localhost:9999");
+        corsConfiguration.setAllowCredentials(true);
+
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration);
+        return source;
     }
 
     @Autowired

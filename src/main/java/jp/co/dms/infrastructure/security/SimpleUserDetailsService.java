@@ -1,4 +1,4 @@
-package jp.co.dms.infra.security;
+package jp.co.dms.infrastructure.security;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

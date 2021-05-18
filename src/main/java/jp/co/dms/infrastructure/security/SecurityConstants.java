@@ -1,4 +1,4 @@
-package jp.co.dms.infra.security;
+package jp.co.dms.infrastructure.security;
 
 public class SecurityConstants {
     public static final String SECRET = "nyasbasamplesecret";
@@ -7,6 +7,6 @@ public class SecurityConstants {
     public static final String HEADER_STRING = "Authorization";
     public static final String SIGNUP_URL = "/user/signup";
     public static final String LOGIN_URL = "/user/login";
-    public static final String LOGIN_ID = "loginId"; // defalut:username
-    public static final String PASSWORD = "pass"; // default:password
+    public static final String LOGIN_ID = "email"; // defalut:username
+    public static final String PASSWORD = "password"; // default:password
 }

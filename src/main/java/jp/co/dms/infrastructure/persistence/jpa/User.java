@@ -1,4 +1,4 @@
-package jp.co.dms.infra.persistence.jpa;
+package jp.co.dms.infrastructure.persistence.jpa;
 
 import lombok.Data;
 

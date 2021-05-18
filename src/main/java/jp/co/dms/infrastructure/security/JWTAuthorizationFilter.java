@@ -1,4 +1,4 @@
-package jp.co.dms.infra.security;
+package jp.co.dms.infrastructure.security;
 
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static jp.co.dms.infra.security.SecurityConstants.*;
+import static jp.co.dms.infrastructure.security.SecurityConstants.*;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     private AuthenticationManager authenticationManager;

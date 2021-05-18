@@ -1,7 +1,7 @@
 package jp.co.dms.interfaces.user.rest;
 
-import jp.co.dms.infra.persistence.jpa.JpaUserRepository;
-import jp.co.dms.infra.persistence.jpa.User;
+import jp.co.dms.infrastructure.persistence.jpa.JpaUserRepository;
+import jp.co.dms.infrastructure.persistence.jpa.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
