@@ -33,6 +33,19 @@
               class="nav-link"
               active-class="active"
               exact
+              :to="{ name: 'building' }"
+          >
+            建物管理
+          </router-link>
+        </li>
+      </ul>
+
+      <ul v-if="isAuthenticated" class="nav pull-xs-right">
+        <li class="nav-item">
+          <router-link
+              class="nav-link"
+              active-class="active"
+              exact
               :to="{ name: 'home' }"
           >
             Home
@@ -69,7 +82,7 @@
               exact
               :to="{ name: 'logout' }"
           >
-            <i class="ion-gear-a"></i>&nbsp;Settings
+            Sign out
           </router-link>
         </li>
       </ul>
