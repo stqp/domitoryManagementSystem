@@ -22,14 +22,14 @@ const actions = {
     [LOGIN](context, credentials) {
         return new Promise(resolve => {
             ApiService.post("user/login", credentials)
-                .then((data) => {
-                    console.log("data", data);
-                    context.commit(SET_AUTH, data.accessToken);
-                    resolve(data);
+                .then((res) => {
+                    console.log("data", res);
+                    context.commit(SET_AUTH, res.data.accessToken);
+                    resolve(res);
                 })
-                .catch((response) => {
-                    console.log("response", response);
-                    context.commit(SET_ERROR, response.data.errors);
+                .catch((res) => {
+                    console.log("response", res);
+                    context.commit(SET_ERROR, res.data.errors);
                 });
         });
     },
@@ -57,7 +57,8 @@ const actions = {
                     context.commit(SET_AUTH, data.user);
                 })
                 .catch(({response}) => {
-                    context.commit(SET_ERROR, response.data.errors);
+                    context.commit(SET_ERROR, response);
+                    // context.commit(SET_ERROR, response.data.errors);
                 });
         } else {
             context.commit(PURGE_AUTH);
@@ -87,6 +88,7 @@ const mutations = {
         state.errors = error;
     },
     [SET_AUTH](state, accessToken) {
+        console.log("set auth", accessToken)
         state.isAuthenticated = true;
         state.accessToken = accessToken;
         state.errors = {};

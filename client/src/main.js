@@ -11,7 +11,14 @@ ApiService.init();
 
 router.beforeEach((to, from, next) => {
     // store.dispatch(CHECK_AUTH)
-    Promise.all([store.dispatch(CHECK_AUTH)]).then(next)
+    Promise.all([store.dispatch(CHECK_AUTH)])
+        .then(() => {
+            if (to.name !== 'login' && !store.getters.isAuthenticated) {
+                next({name: "login"});
+            } else {
+                next();
+            }
+        });
 })
 
 new Vue({

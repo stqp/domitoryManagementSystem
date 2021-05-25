@@ -25,7 +25,14 @@ export default new Router({
         {
             path: '/building',
             name: 'building',
-            component: () => import("@/components/TheHeaderBuildingMenu"),
+            component: () => import("@/components/BuildingManagement"),
+            children: [
+                {
+                    path: 'buildings',
+                    name: 'buildings',
+                    component: () => import("@/components/Buildings")
+                }
+            ]
         },
     ]
 })

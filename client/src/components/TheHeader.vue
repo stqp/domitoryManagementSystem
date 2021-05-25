@@ -10,16 +10,6 @@
               class="nav-link"
               active-class="active"
               exact
-              :to="{ name: 'home' }"
-          >
-            Home
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link
-              class="nav-link"
-              active-class="active"
-              exact
               :to="{ name: 'login' }"
           >
             <i class="ion-compose"></i>Sign in
@@ -33,34 +23,30 @@
               class="nav-link"
               active-class="active"
               exact
-              :to="{ name: 'building' }"
-          >
-            建物管理
-          </router-link>
-        </li>
-      </ul>
-
-      <ul v-if="isAuthenticated" class="nav pull-xs-right">
-        <li class="nav-item">
-          <router-link
-              class="nav-link"
-              active-class="active"
-              exact
               :to="{ name: 'home' }"
           >
             Home
           </router-link>
         </li>
-
         <li class="nav-item">
           <router-link
               class="nav-link"
               active-class="active"
               exact
-              :to="{ name: 'settings' }"
+              :to="{ name: 'building' }"
           >
-            <i class="ion-gear-a"></i>&nbsp;Settings
+            建物管理
           </router-link>
+        </li>
+        <li class="nav-item">
+          <!--          <router-link-->
+          <!--              class="nav-link"-->
+          <!--              active-class="active"-->
+          <!--              exact-->
+          <!--              :to="{ name: 'settings' }"-->
+          <!--          >-->
+          <!--            <i class="ion-gear-a"></i>&nbsp;Settings-->
+          <!--          </router-link>-->
         </li>
         <li class="nav-item" v-if="currentUser.username">
           <router-link

@@ -1,29 +1,26 @@
 <template>
-  <nav class="d-none d-md-block bg-light sidebar">
-    <div>
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <router-link
-              class="nav-link"
-              exact
-              :to="contentbuilding"
-          >
-            建物
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link
-              class="nav-link"
-              exact
-              :to="contentbuilding"
-          >
-            建物
-          </router-link>
+  <div>
+    <ul class="nav flex-column text-justify">
+      <li class="nav-item">
+        <router-link
+            class="nav-link"
+            exact
+            :to="{name:'buildings'}"
+        >
+          建物
+        </router-link>
+      </li>
+      <li class="nav-item">
+        <router-link
+            class="nav-link"
+            exact
+            :to="{name: 'room'}"
+        >
           部屋
-        </li>
-      </ul>
-    </div>
-  </nav>
+        </router-link>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
