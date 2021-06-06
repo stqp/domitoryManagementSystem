@@ -1,19 +1,29 @@
 package jp.co.dms.domain.model.rentalproperty;
 
-import jp.co.dms.domain.shared.Entity;
+
+import jp.co.dms.domain.shared.BaseEntity;
 import lombok.Data;
 
-import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@NamedQueries({
+        @NamedQuery(name = "Building.findAll",
+                query = "Select b from Building b")})
 @Data
-public class Building extends Entity {
+public class Building extends BaseEntity {
 
-    private int id;
+    @Id
+    @GeneratedValue
+    private Long id;
+
     private String name;
-
-    private List<Floor> floors;
 
     public Building(String name) {
         this.name = name;
+    }
+
+    public Building() {
+
     }
 }

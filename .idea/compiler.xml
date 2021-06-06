@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="dormitoryManagementSystem" target="1.8" />
+      <module name="dormitoryManagementSystem" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

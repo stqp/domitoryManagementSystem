@@ -1,4 +1,4 @@
-package jp.co.dms.interfaces.user.rest;
+package jp.co.dms.interfaces.user.rest.dto;
 
 import jp.co.dms.domain.model.rentalproperty.Building;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class PostBuildingResponse {
 
-    private int id;
+    private Long id;
     private String name;
 
     public static PostBuildingResponse from(Building building) {

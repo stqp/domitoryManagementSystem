@@ -1,14 +1,33 @@
 package jp.co.dms.infrastructure.persistence.jpa;
 
+import jp.co.dms.domain.model.location.Address;
 import jp.co.dms.domain.model.rentalproperty.Building;
-import org.springframework.data.jpa.repository.JpaRepository;
+import jp.co.dms.domain.model.rentalproperty.BuildingRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
+
 
 @Repository
-public class JpaBuildingRepository extends JpaRepository<Building, Integer> {
-    Optional<Building> findByEmail(String email);
+public class JpaBuildingRepository implements BuildingRepository {
 
-    Optional<Building> findFirstByName(String name);
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Override
+    public Building find(Address address) {
+        return null;
+    }
+
+    @Override
+    public List<Building> findAll() {
+        return entityManager.createNamedQuery("Building.findAll", Building.class).getResultList();
+    }
+
+    @Override
+    public Building save(Building building) {
+        return null;
+    }
 }

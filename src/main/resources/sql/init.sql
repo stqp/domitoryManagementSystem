@@ -6,3 +6,10 @@ create table user (
 );
 
 insert into user (id, name, email, pass) values(1, 'test01', 'test01@gmail.com', 'pass');
+
+
+create table building (
+    id int primary key,
+    name char(255)
+
+);
