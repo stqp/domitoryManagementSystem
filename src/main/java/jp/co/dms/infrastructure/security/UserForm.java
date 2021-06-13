@@ -3,7 +3,9 @@ package jp.co.dms.infrastructure.security;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class UserForm {
+
     private String email;
+
     private String password;
 
     public String getEmail() {

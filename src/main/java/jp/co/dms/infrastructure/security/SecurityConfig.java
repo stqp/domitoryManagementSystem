@@ -28,17 +28,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .cors()
-                .and().authorizeRequests()
-                .antMatchers("/public", SIGNUP_URL, LOGIN_URL).permitAll()
-                .anyRequest().authenticated()
-                .and()
                 .cors().configurationSource(this.corsConfigurationSource())
-                .and().logout()
+
+                .and().authorizeRequests()
+                .antMatchers(SIGNUP_URL, LOGIN_URL).permitAll()
+                .anyRequest().authenticated()
+
                 .and().csrf().disable()
+
                 .addFilter(new JWTAuthenticationFilter(authenticationManager(), bCryptPasswordEncoder()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
     }
 
 
@@ -47,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         corsConfiguration.addAllowedHeader(CorsConfiguration.ALL);
         corsConfiguration.addAllowedMethod(CorsConfiguration.ALL);
         corsConfiguration.addAllowedOrigin("http://localhost:8080");
+        corsConfiguration.addAllowedOrigin("http://localhost:8081");
         corsConfiguration.addAllowedOrigin("http://localhost:9999");
         corsConfiguration.setAllowCredentials(true);
 

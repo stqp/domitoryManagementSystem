@@ -10,5 +10,5 @@ public interface BuildingRepository {
 
     List<Building> findAll();
 
-    Building save(Building building);
+    void save(Building building);
 }

@@ -12,9 +12,8 @@ import java.util.List;
 @Service
 public class SimpleUserDetailsService implements UserDetailsService {
 
-    private static List<String> usernameList = Arrays.asList("user01", "admin01");
+    private static List<String> usernameList = Arrays.asList("user", "admin01");
     private static String ENCRYPTED_PASSWORD = "$2a$10$5DF/j5hHnbeHyh85/0Bdzu1HV1KyJKZRt2GhpsfzQ8387A/9duSuq";
-    private static String password = "password";
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

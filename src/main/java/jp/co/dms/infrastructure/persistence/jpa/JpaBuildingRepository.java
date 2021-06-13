@@ -27,7 +27,7 @@ public class JpaBuildingRepository implements BuildingRepository {
     }
 
     @Override
-    public Building save(Building building) {
-        return null;
+    public void save(Building building) {
+        entityManager.persist(building);
     }
 }

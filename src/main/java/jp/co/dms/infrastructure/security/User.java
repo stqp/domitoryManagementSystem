@@ -1,13 +1,18 @@
+package jp.co.dms.infrastructure.security;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "user")
+//@Entity
+//@Table(name = "user")
 @Data
 @Builder
 @AllArgsConstructor

@@ -5,20 +5,23 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "User")
 @Data
+@Table(name = "\"user\"")
 public class User {
 
     @Id
     @GeneratedValue
-    private Long id;
+    Long id;
 
     @Column(name = "name")
-    public String name;
+    String name;
 
-    public String password;
+    @Column(name = "password")
+    String password;
 
-    public Boolean admin;
+    @Column(name = "admin")
+    Boolean admin;
 
-    public String email;
+    @Column(name = "email")
+    String email;
 }

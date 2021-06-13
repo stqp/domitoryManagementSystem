@@ -6,16 +6,19 @@ import jp.co.dms.domain.model.rentalproperty.BuildingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
+
 public class DefaultBuildingService implements BuildingService {
 
     @Autowired
     private BuildingRepository buildingRepository;
 
-    public Building addBuilding(String buildingName) {
-        Building building = new Building(buildingName);
+    public Building addBuilding(String name) {
+        Building building = new Building(name);
         buildingRepository.save(building);
         return building;
     }

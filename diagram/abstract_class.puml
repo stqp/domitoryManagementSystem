@@ -6,9 +6,7 @@ package Shared {
   }
 }
 package RentalProperty{
-  class Building {
-    name
-  }
+  class Building
   class Floor
   class Room
   Building o- Floor
@@ -64,7 +62,12 @@ package Resident{
   Individual - Corporation :勤務
 }
 package Location{
-  class Address
+  class Address {
+    postcode
+    country
+    prefecture
+    city
+  }
   class TelephoneNumber
   class EmailAddress
 }

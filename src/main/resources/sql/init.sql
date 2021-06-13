@@ -11,5 +11,10 @@ insert into user (id, name, email, pass) values(1, 'test01', 'test01@gmail.com',
 create table building (
     id int primary key,
     name char(255)
-
 );
+
+
+create table floor {
+    id int primary key,
+    name
+}

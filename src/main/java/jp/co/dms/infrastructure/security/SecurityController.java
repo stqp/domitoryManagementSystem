@@ -4,13 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-
-import static jp.co.dms.infrastructure.security.SecurityConstants.SIGNUP_URL;
 
 @RestController
 public class SecurityController {
@@ -31,10 +25,10 @@ public class SecurityController {
 //        return "this is private for " + username;
 //    }
 
-    @PostMapping(value = SIGNUP_URL)
-    public void signup(@Valid @RequestBody UserForm user) {
-        user.encrypt(bCryptPasswordEncoder);
-        LOGGER.info("signup :" + user.toString());
-    }
+//    @PostMapping(value = SecurityConstants.LOGIN_URL)
+//    public void signup(@Valid @RequestBody UserForm user) {
+//        user.encrypt(bCryptPasswordEncoder);
+//        LOGGER.info("signup :" + user.toString());
+//    }
 
 }
