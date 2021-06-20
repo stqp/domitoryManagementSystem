@@ -10,5 +10,19 @@ public interface BuildingRepository {
 
     List<Building> findAll();
 
+    Building findByBuildingId(Long id);
+
+    Floor findByFloorId(Long id);
+
+    Room findByRoomId(Long id);
+
     void save(Building building);
+
+    void save(Floor floor);
+
+
+    void removeByBuildingId(Long id);
+
+    void removeByFloorId(Long id);
+
 }

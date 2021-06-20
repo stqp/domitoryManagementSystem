@@ -1,26 +1,35 @@
 package jp.co.dms.domain.model.rentalproperty;
 
 
+import jp.co.dms.domain.shared.BaseEntity;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
-public class Room {
+@NamedQueries({
+        @NamedQuery(name = "Room.findAll",
+                query = "Select r from Room r"),
+        @NamedQuery(name = "Room.findById",
+                query = "Select r from Room r where r.id = :id")})
+public class Room extends BaseEntity {
+
+    public Room() {
+    }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id;
 
     @Column(name = "name")
     String name;
 
+    @Column(name = "floorLevel")
+    Integer floorLevel;
+
     @Column(name = "capacity")
-    int capacity;
+    Integer capacity;
 
     @Column(name = "squareMeters")
     float squareMeters;

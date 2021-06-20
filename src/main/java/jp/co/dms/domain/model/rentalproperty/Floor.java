@@ -1,30 +1,43 @@
 package jp.co.dms.domain.model.rentalproperty;
 
+import jp.co.dms.domain.shared.BaseEntity;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
-public class Floor {
+@NamedQueries({
+        @NamedQuery(name = "Floor.findAll",
+                query = "Select f from Floor f"),
+        @NamedQuery(name = "Floor.findById",
+                query = "Select f from Floor f where f.id = :id")})
+public class Floor extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id;
 
-    @OneToMany
-    List<Room> rooms;
+    Integer level;
 
-    void updateRoom(Room room) {
+    @OneToMany(orphanRemoval = true)
+    List<Room> rooms = new ArrayList<>();
+
+    public Floor(Integer level) {
+        this.level = level;
+    }
+
+    public Floor() {
+    }
+
+    public void updateRoom(Room room) {
         Room oldRoom = findRoom(room);
         oldRoom.copyValuesFrom(room);
     }
 
-    void addNewRoom(Room room) {
+    public void addNewRoom(Room room) {
         rooms.add(room);
     }
 

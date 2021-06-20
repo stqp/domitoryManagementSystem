@@ -4,24 +4,28 @@ import jp.co.dms.domain.shared.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Building.findAll",
-                query = "Select b from Building b")})
-@Data
+                query = "Select b from Building b"),
+        @NamedQuery(name = "Building.findById",
+                query = "Select b from Building b where b.id = :id")})
 public class Building extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @OneToMany
-    private List<Floor> floors;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<Floor> floors = new ArrayList<>();
 
     public Building(String name) {
         this.name = name;
@@ -30,15 +34,15 @@ public class Building extends BaseEntity {
     public Building() {
     }
 
-    void addNewFloor(Floor floor) {
+    public void addNewFloor(Floor floor) {
         this.floors.add(floor);
     }
 
-    void addNewRoom(Long floorId, Room room) {
+    public void addNewRoom(Long floorId, Room room) {
         findFloorById(floorId).addNewRoom(room);
     }
 
-    List<Floor> findAllFloor() {
+    public List<Floor> findAllFloor() {
         return floors;
     }
 
