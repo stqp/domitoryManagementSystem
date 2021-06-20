@@ -13,7 +13,7 @@ const ApiService = {
     setHeader() {
         Vue.axios.defaults.headers.common[
             "Authorization"
-            ] = `Token ${JwtService.getToken()}`;
+            ] = `Bearer ${JwtService.getToken()}`;
     },
 
     query(resource, params) {
@@ -40,8 +40,9 @@ const ApiService = {
         return Vue.axios.put(`${resource}`, params);
     },
 
-    delete(resource) {
-        return Vue.axios.delete(resource).catch(error => {
+    delete(resource, params) {
+        console.log("params", params)
+        return Vue.axios.delete(`${resource}`, {data: params}).catch(error => {
             throw new Error(`[RWV] ApiService ${error}`);
         });
     }

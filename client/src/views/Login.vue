@@ -47,7 +47,7 @@ export default {
     doSignIn(email, password) {
       this.$store
           .dispatch(LOGIN, {email, password})
-          .then(() => this.$router.push({name: "home"}));
+          .then(() => this.$router.push({name: "buildings"}));
     },
   },
   computed: {

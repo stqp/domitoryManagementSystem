@@ -21,3 +21,5 @@ export const LOGOUT = "logout";
 export const REGISTER = "register";
 export const UPDATE_USER = "updateUser";
 export const ADD_BUILDING = "addBuilding";
+export const GET_ALL_BUILDING = "getAllBuilding";
+export const REMOVE_BUILDING = "removeBuilding";

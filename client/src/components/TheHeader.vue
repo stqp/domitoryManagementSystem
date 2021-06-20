@@ -33,7 +33,7 @@
               class="nav-link"
               active-class="active"
               exact
-              :to="{ name: 'building' }"
+              :to="{ name: 'buildings' }"
           >
             建物管理
           </router-link>
