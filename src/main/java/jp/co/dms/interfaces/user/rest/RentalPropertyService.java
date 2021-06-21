@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-public class RentalPropertyManageService extends BaseRestService {
+public class RentalPropertyService extends BaseRestService {
 
     private static final String BUILDING_API_URL = "/building";
 
