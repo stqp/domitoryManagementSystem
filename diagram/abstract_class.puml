@@ -14,13 +14,9 @@ package RentalProperty{
   Building -- Location.Address
 }
 package Rent {
-  class Contract {
-    startedAt
-  }
+  class Contract
   class Pledge
-  class Guarantee {
-    relationship
-  }
+  class Guarantee
   note top of Guarantee: 保証人になれるのは社会人のみ
   note top of Guarantee: 学生は保証人必須
   class Application
@@ -44,21 +40,19 @@ package Rent {
   Guarantee -- Resident.Individual: 保証人
 }
 package Resident{
-  class LesseeParty
-  class PersonParty {
-    String name
-    String name_kana
-  }
+  class Lessee
+  class Renter
+  class Party
   class Corporation
   class Individual
 
-  LesseeParty -- Individual
-  LesseeParty -- Corporation
-  PersonParty -- Individual
-  PersonParty -- Corporation
-  PersonParty -- Location.EmailAddress
-  PersonParty -- Location.Address
-  PersonParty -- Location.TelephoneNumber
+  Lessee --> Individual
+  Lessee --> Corporation
+  Party --> Individual
+  Party --> Corporation
+  Party -- Location.EmailAddress
+  Party -- Location.Address
+  Party -- Location.TelephoneNumber
   Individual - Corporation :勤務
 }
 package Location{

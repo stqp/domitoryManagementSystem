@@ -8,19 +8,12 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class Address {
+public class Phone {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String postcode;
+    private String phone;
 
-    private String country;
-
-    private String prefecture;
-
-    private String city;
-
-    private String street;
 }
