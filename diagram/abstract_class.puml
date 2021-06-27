@@ -16,9 +16,12 @@ package RentalProperty{
 package Rent {
   class Contract
   class Pledge
-  class Guarantee
-  note top of Guarantee: 保証人になれるのは社会人のみ
-  note top of Guarantee: 学生は保証人必須
+  class Guaranty {
+    guarantor
+    guarantee
+  }
+  note top of Guaranty: 保証人になれるのは社会人のみ
+  note top of Guaranty: 学生は保証人必須
   class Application
   class MoveInOut {
     moveInAt
@@ -26,44 +29,38 @@ package Rent {
   class HandOverKey
   class RoomAssignment
   Room -- Contract
-  Contract -- Resident.LesseeParty
+  Contract -- Resident.RentParty
   Room -- Pledge
-  Pledge -- Resident.LesseeParty
+  Pledge -- Resident.RentParty
   Room -- MoveInOut
-  MoveInOut -- Resident.LesseeParty
+  MoveInOut -- Resident.RentParty
   Room -- HandOverKey
-  HandOverKey -- Resident.LesseeParty
+  HandOverKey -- Resident.RentParty
   Room -- RoomAssignment
-  RoomAssignment -- Resident.LesseeParty
-  Application -- Resident.LesseeParty
-  Guarantee -- Resident.LesseeParty:被保証
-  Guarantee -- Resident.Individual: 保証人
+  RoomAssignment -- Resident.RentParty
+  Application -- Resident.RentParty
+  Guaranty -- Resident.RentParty:被保証
+  Guaranty -- Resident.Individual: 保証人
 }
 package Resident{
-  class Lessee
-  class Renter
-  class Party
+  class RentParty
+  class LocationParty
   class Corporation
   class Individual
 
-  Lessee --> Individual
-  Lessee --> Corporation
-  Party --> Individual
-  Party --> Corporation
-  Party -- Location.EmailAddress
-  Party -- Location.Address
-  Party -- Location.TelephoneNumber
+  RentParty --> Individual
+  RentParty --> Corporation
+  LocationParty --> Individual
+  LocationParty --> Corporation
+  LocationParty -- Location.Email
+  LocationParty -- Location.Address
+  LocationParty -- Location.Phone
   Individual - Corporation :勤務
 }
 package Location{
-  class Address {
-    postcode
-    country
-    prefecture
-    city
-  }
-  class TelephoneNumber
-  class EmailAddress
+  class Address
+  class Phone
+  class Email
 }
 
 package Payment {
@@ -76,6 +73,7 @@ package Payment {
     AccountNameKana
   }
   class Payment
+  class PaymentTerm
   class Exemption
   class FullPayment
   class Installment
@@ -83,7 +81,6 @@ package Payment {
   Exemption -- Contract
   Payment <|-- FullPayment
   Payment <|-- Installment
-  Payment -- Location.Address
 }
 
 package school {

@@ -1,6 +1,6 @@
 package jp.co.dms.domain.model.rent;
 
-import jp.co.dms.domain.model.resident.Party;
+import jp.co.dms.domain.model.resident.LocationParty;
 import jp.co.dms.domain.shared.BaseEntity;
 import lombok.Data;
 
@@ -19,9 +19,9 @@ public class Guaranty extends BaseEntity {
 
     // 保証人
     @OneToOne
-    private Party guarantor;
+    private LocationParty guarantor;
 
     // 被保証人
     @OneToOne
-    private Party Guarantee;
+    private LocationParty guarantee;
 }

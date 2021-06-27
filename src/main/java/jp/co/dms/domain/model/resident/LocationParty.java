@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
-public class Party extends BaseEntity {
+public class LocationParty extends BaseEntity {
 
     @Id
     @GeneratedValue
