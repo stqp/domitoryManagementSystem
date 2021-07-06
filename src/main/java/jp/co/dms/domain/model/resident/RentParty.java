@@ -21,4 +21,6 @@ public class RentParty extends BaseEntity {
     @OneToMany
     private List<Guaranty> guaranty;
 
+    private RentPartyType rentPartyType;
+
 }

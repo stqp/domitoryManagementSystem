@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class TestAspect {
 
-    @AfterReturning(value = "execution(* jp.co.dms.interfaces.user.rest.RentalPropertyService.*(..))", returning = "r")
+    @AfterReturning(value = "execution(* jp.co.dms.interfaces.rentalproperty.rest.RentalPropertyController.*(..))", returning = "r")
     public void handler(Object r) {
         ch.qos.logback.classic.Logger logger = (Logger) LoggerFactory.getLogger(TestAspect.class);
         logger.setLevel(Level.WARN);

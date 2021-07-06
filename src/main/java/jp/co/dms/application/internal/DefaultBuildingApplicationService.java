@@ -1,6 +1,6 @@
 package jp.co.dms.application.internal;
 
-import jp.co.dms.application.BuildingService;
+import jp.co.dms.application.BuildingApplicationService;
 import jp.co.dms.domain.model.rentalproperty.Building;
 import jp.co.dms.domain.model.rentalproperty.BuildingRepository;
 import jp.co.dms.domain.model.rentalproperty.Floor;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class DefaultBuildingService implements BuildingService {
+public class DefaultBuildingApplicationService implements BuildingApplicationService {
 
     @Autowired
     private BuildingRepository buildingRepository;

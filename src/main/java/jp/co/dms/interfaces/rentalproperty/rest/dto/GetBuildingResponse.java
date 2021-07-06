@@ -1,4 +1,4 @@
-package jp.co.dms.interfaces.user.rest.dto;
+package jp.co.dms.interfaces.rentalproperty.rest.dto;
 
 import jp.co.dms.domain.model.rentalproperty.Building;
 import lombok.Data;

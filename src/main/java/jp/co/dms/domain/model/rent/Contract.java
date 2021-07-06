@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,7 +25,7 @@ public class Contract extends BaseEntity {
     private Room room;
 
     @OneToOne
-    private RentParty rentParty;
+    private List<RentParty> rentParties;
 
     @OneToOne
     private Payment payment;
@@ -35,5 +36,21 @@ public class Contract extends BaseEntity {
     private Date startAt;
 
     private Date endAt;
+
+    public Contract(
+            Room room,
+            Payment payment,
+            List<RentParty> rentParties,
+            ContractBody contractBody,
+            Date startAt,
+            Date endAt) {
+        this.room = room;
+        this.payment = payment;
+        this.rentParties = rentParties;
+        this.contractBody = contractBody;
+        this.startAt = startAt;
+        this.endAt = endAt;
+    }
+    
 
 }

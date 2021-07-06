@@ -5,7 +5,7 @@ import jp.co.dms.domain.model.rentalproperty.Room;
 
 import java.util.List;
 
-public interface BuildingService {
+public interface BuildingApplicationService {
 
     Building addBuilding(String buildingName, Integer floorLevel, List<Room> rooms);
 
